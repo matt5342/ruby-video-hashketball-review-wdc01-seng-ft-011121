@@ -128,3 +128,94 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(player)
+  game_hash.each do |team_type, team_charac|
+    game_hash[team_type][:players].each do |stats|
+      stats.each do |key, value|
+        if value == player
+          return stats.fetch(:points)
+          break
+        end
+      end
+    end
+  end
+end
+
+def shoe_size(player)
+  
+  game_hash.each do |team_type, team_charac|
+    game_hash[team_type][:players].each do |stats|
+      stats.each do |key, value|
+        if value == player
+          return stats.fetch(:shoe)
+          break
+        end
+      end
+    end
+  end
+end
+
+def team_colors(name)
+  game_hash.each do |team_type, team_charac|
+    game_hash[team_type][:colors].each do |color|
+      if name == game_hash[team_type][:team_name]
+        return game_hash[team_type][:colors]
+        break
+      end
+    end
+  end
+end
+def team_names
+  names = []
+  game_hash.each do |team_type, team_charac|
+    names << game_hash[team_type][:team_name]
+  end
+  names
+end
+def player_numbers(name)
+  numbers = []
+  game_hash.each do |team_type, team_charac|
+    if game_hash[team_type][:team_name] == name
+      game_hash[team_type][:players].each do |stats|
+        stats.each do |key, value|
+          numbers << stats.fetch(:number)
+        end
+      end
+    end
+  end
+  numbers.uniq
+end
+
+def player_stats(name)
+  game_hash.each do |team_type, team_charac|
+    game_hash[team_type][:players].each do |stats|
+      stats.each do |key, value|
+        if value == name 
+          return stats
+          break
+        end
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  size = 0
+  game_hash.each do |team_type, team_charac|
+    game_hash[team_type][:players].each do |stats|
+        if stats.fetch(:shoe) > size
+          size = stats.fetch(:shoe)
+        end
+    end
+  end
+    game_hash.each do |team_type, team_charac|
+    game_hash[team_type][:players].each do |stats|
+        if stats.fetch(:shoe) == size
+          return stats.fetch(:rebounds)
+          break
+        end
+    end
+  end
+  
+end
